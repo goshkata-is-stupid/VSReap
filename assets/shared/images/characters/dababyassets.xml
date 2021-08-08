@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="dababyassets.png"><SubTexture name="dababyassets idle0000" x="0" y="0" width="783" height="468" frameX="0" frameY="0" frameWidth="783" frameHeight="468" />
+<SubTexture name="dababyidle0001" x="783" y="0" width="787" height="480" frameX="0" frameY="0" frameWidth="787" frameHeight="480" />
+<SubTexture name="dababyidle0002" x="1570" y="0" width="789" height="491" frameX="0" frameY="0" frameWidth="789" frameHeight="491" />
+<SubTexture name="dababyidle0003" x="2359" y="0" width="790" height="502" frameX="0" frameY="0" frameWidth="790" frameHeight="502" />
+<SubTexture name="dababyidle0004" x="0" y="502" width="789" height="491" frameX="0" frameY="0" frameWidth="789" frameHeight="491" />
+<SubTexture name="dababyidle0005" x="789" y="502" width="787" height="480" frameX="0" frameY="0" frameWidth="787" frameHeight="480" />
+<SubTexture name="dababyidle0006" x="1576" y="502" width="783" height="468" frameX="0" frameY="0" frameWidth="783" frameHeight="468" />
+<SubTexture name="dababyright0000" x="2359" y="502" width="761" height="474" frameX="0" frameY="0" frameWidth="761" frameHeight="474" />
+<SubTexture name="dababyright0001" x="0" y="993" width="765" height="475" frameX="0" frameY="0" frameWidth="765" frameHeight="475" />
+<SubTexture name="dababyright0002" x="765" y="993" width="767" height="476" frameX="0" frameY="0" frameWidth="767" frameHeight="476" />
+<SubTexture name="dababyleft0000" x="1532" y="993" width="720" height="503" frameX="0" frameY="0" frameWidth="720" frameHeight="503" />
+<SubTexture name="dababyleft0001" x="2252" y="993" width="725" height="505" frameX="0" frameY="0" frameWidth="725" frameHeight="505" />
+<SubTexture name="dababyleft0002" x="0" y="1498" width="736" height="513" frameX="0" frameY="0" frameWidth="736" frameHeight="513" />
+<SubTexture name="dababydown0000" x="736" y="1498" width="753" height="423" frameX="0" frameY="0" frameWidth="753" frameHeight="423" />
+<SubTexture name="dababydown0001" x="1489" y="1498" width="752" height="397" frameX="0" frameY="0" frameWidth="752" frameHeight="397" />
+<SubTexture name="dababydown0002" x="2241" y="1498" width="750" height="379" frameX="0" frameY="0" frameWidth="750" frameHeight="379" />
+<SubTexture name="dababyup0000" x="0" y="2011" width="523" height="563" frameX="0" frameY="0" frameWidth="523" frameHeight="563" />
+<SubTexture name="dababyup0001" x="523" y="2011" width="527" height="575" frameX="0" frameY="0" frameWidth="527" frameHeight="575" />
+</TextureAtlas>
