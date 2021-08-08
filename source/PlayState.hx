@@ -127,7 +127,7 @@ class PlayState extends MusicBeatState
 
 	private var gfSpeed:Int = 1;
 	public var health:Float = 1; //making public because sethealth doesnt work without it
-    public var noteType:Int = 0:
+    public var noteType:Int = 0;
 	private var combo:Int = 0;
 	public static var misses:Int = 0;
 	private var accuracy:Float = 0.00;
@@ -251,6 +251,7 @@ class PlayState extends MusicBeatState
                             }
                         }
             }
+		}
  
 
 
@@ -935,7 +936,7 @@ class PlayState extends MusicBeatState
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
 				dad.y += 150;
 				dad.x -= 430;
-                FlxTween.tween(dad. {x: 214.2, y: 300}, 1.5, {type : FlxTweenType.PINGPONG, ease: FlxEase.circIn, loopDelay: 0});
+                FlxTween.tween(dad, {x: 214.2, y: 300}, 1.5, {type : FlxTweenType.PINGPONG, ease: FlxEase.circIn, loopDelay: 0});
 			case 'parents-christmas':
 				dad.x -= 500;
 			case 'senpai':

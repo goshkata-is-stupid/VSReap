@@ -516,9 +516,8 @@ class Character extends FlxSprite
 				addOffset("singDOWN", 0, -30);
 
 				playAnim('idle');
-		}
-        
-        case 'dababy':
+
+			 case 'dababy':
 				// HA I NEED ME SOME SHIT WITH SOME BOP IN IT AKA DABABY LOADING CODE
 				tex = Paths.getSparrowAtlas('characters/', 'shared');
 				frames = tex;
