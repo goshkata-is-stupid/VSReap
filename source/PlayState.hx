@@ -79,6 +79,7 @@ class PlayState extends MusicBeatState
 	public static var bads:Int = 0;
 	public static var goods:Int = 0;
 	public static var sicks:Int = 0;
+    
 
 	public static var songPosBG:FlxSprite;
 	public static var songPosBar:FlxBar;
@@ -126,6 +127,7 @@ class PlayState extends MusicBeatState
 
 	private var gfSpeed:Int = 1;
 	public var health:Float = 1; //making public because sethealth doesnt work without it
+    public var noteType:Int = 0:
 	private var combo:Int = 0;
 	public static var misses:Int = 0;
 	private var accuracy:Float = 0.00;
@@ -134,6 +136,121 @@ class PlayState extends MusicBeatState
 	private var totalNotesHitDefault:Float = 0;
 	private var totalPlayed:Int = 0;
 	private var ss:Bool = false;
+        public function new(strumTime:Float, noteData:Int, ?prevNote:Note, ?sustainNote:Bool = false, ?noteType:Int = 0)
+        {
+            super();
+ 
+            if (prevNote == null)
+                prevNote = this;
+            this.noteType = noteType;
+            this.prevNote = prevNote;
+            isSustainNote = sustainNote;
+ 
+            x += 50;
+            // MAKE SURE ITS DEFINITELY OFF SCREEN?
+            y -= 2000;
+            this.strumTime = strumTime;
+ 
+            if (this.strumTime < 0 )
+                this.strumTime = 0;
+ 
+            this.noteData = noteData;
+ 
+            var daStage:String = PlayState.curStage;
+ 
+            switch (PlayState.SONG.noteStyle)
+            {
+                case 'pixel':
+                    loadGraphic(Paths.image('weeb/pixelUI/arrows-pixels','week6'), true, 17, 17);
+ 
+                    if (noteType == 2)
+                        {
+                            animation.add('greenScroll', [22]);
+                            animation.add('redScroll', [23]);
+                            animation.add('blueScroll', [21]);
+                            animation.add('purpleScroll', [20]);
+                        }
+                    else
+                        {
+                            animation.add('greenScroll', [6]);
+                            animation.add('redScroll', [7]);
+                            animation.add('blueScroll', [5]);
+                            animation.add('purpleScroll', [4]);
+                        }
+ 
+                    if (isSustainNote)
+                    {
+                        loadGraphic(Paths.image('weeb/pixelUI/arrowEnds','week6'), true, 7, 6);
+ 
+                        animation.add('purpleholdend', [4]);
+                        animation.add('greenholdend', [6]);
+                        animation.add('redholdend', [7]);
+                        animation.add('blueholdend', [5]);
+ 
+                        animation.add('purplehold', [0]);
+                        animation.add('greenhold', [2]);
+                        animation.add('redhold', [3]);
+                        animation.add('bluehold', [1]);
+                    }
+ 
+                    setGraphicSize(Std.int(width * PlayState.daPixelZoom));
+                    updateHitbox();
+                default:
+                        frames = Paths.getSparrowAtlas('NOTE_assets');
+                        var fuckingSussy = Paths.getSparrowAtlas('BONENotes');
+                        for(amogus in fuckingSussy.frames)
+                            {
+                                this.frames.pushFrame(amogus);
+                            }
+ 
+                        switch(noteType)
+                        {
+                            case 2:
+                            {
+                                frames = Paths.getSparrowAtlas('BONENotes');
+                                animation.addByPrefix('greenScroll', 'green0');
+                                animation.addByPrefix('redScroll', 'red0');
+                                animation.addByPrefix('blueScroll', 'blue0');
+                                animation.addByPrefix('purpleScroll', 'purple0');
+ 
+                                animation.addByPrefix('purpleholdend', 'pruple end hold');
+                                animation.addByPrefix('greenholdend', 'green hold end');
+                                animation.addByPrefix('redholdend', 'red hold end');
+                                animation.addByPrefix('blueholdend', 'blue hold end');
+ 
+                                animation.addByPrefix('purplehold', 'purple hold piece');
+                                animation.addByPrefix('greenhold', 'green hold piece');
+                                animation.addByPrefix('redhold', 'red hold piece');
+                                animation.addByPrefix('bluehold', 'blue hold piece');
+ 
+                                setGraphicSize(Std.int(width * 0.7));
+                                updateHitbox();
+                                antialiasing = true;
+                            }
+                            default:
+                            {
+                                frames = Paths.getSparrowAtlas('NOTE_assets');
+                                animation.addByPrefix('greenScroll', 'green0');
+                                animation.addByPrefix('redScroll', 'red0');
+                                animation.addByPrefix('blueScroll', 'blue0');
+                                animation.addByPrefix('purpleScroll', 'purple0');
+ 
+                                animation.addByPrefix('purpleholdend', 'pruple end hold');
+                                animation.addByPrefix('greenholdend', 'green hold end');
+                                animation.addByPrefix('redholdend', 'red hold end');
+                                animation.addByPrefix('blueholdend', 'blue hold end');
+ 
+                                animation.addByPrefix('purplehold', 'purple hold piece');
+                                animation.addByPrefix('greenhold', 'green hold piece');
+                                animation.addByPrefix('redhold', 'red hold piece');
+                                animation.addByPrefix('bluehold', 'blue hold piece');
+ 
+                                setGraphicSize(Std.int(width * 0.7));
+                                updateHitbox();
+                                antialiasing = true;
+                            }
+                        }
+            }
  
 
 
@@ -818,6 +935,7 @@ class PlayState extends MusicBeatState
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
 				dad.y += 150;
 				dad.x -= 430;
+                FlxTween.tween(dad. {x: 214.2, y: 300}, 1.5, {type : FlxTweenType.PINGPONG, ease: FlxEase.circIn, loopDelay: 0});
 			case 'parents-christmas':
 				dad.x -= 500;
 			case 'senpai':
@@ -863,7 +981,7 @@ class PlayState extends MusicBeatState
 			case 'schoolEvil':
 				if(FlxG.save.data.distractions){
 				// trailArea.scrollFactor.set();
-				var evilTrail = new FlxTrail(dad, null, 1, 24, 0.3, 0.069);
+				var evilTrail = new FlxTrail(dad, null, 4, 1, 0.3, 0.069);
 				// evilTrail.changeValuesEnabled(false, false, false, false);
 				// evilTrail.changeGraphic()
 				add(evilTrail);
@@ -876,7 +994,7 @@ class PlayState extends MusicBeatState
 				gf.y -= 120;
 				if(FlxG.save.data.distractions){
 				// trailArea.scrollFactor.set();
-				var evilTrail = new FlxTrail(dad, null, 1, 24, 0.3, 0.069);
+				var evilTrail = new FlxTrail(dad, null, 5, 7, 0.3, 0.001);
 				// evilTrail.changeValuesEnabled(false, false, false, false);
 				// evilTrail.changeGraphic()
 				add(evilTrail);
@@ -889,7 +1007,7 @@ class PlayState extends MusicBeatState
 				gf.y -= 120;
 				if(FlxG.save.data.distractions){
 				// trailArea.scrollFactor.set();
-				var evilTrail = new FlxTrail(dad, null, 1, 24, 0.3, 0.069);
+				var evilTrail = new FlxTrail(dad, null, 5, 7, 0.3, 0.001);
 				// evilTrail.changeValuesEnabled(false, false, false, false);
 				// evilTrail.changeGraphic()
 				add(evilTrail);
@@ -902,7 +1020,7 @@ class PlayState extends MusicBeatState
 				gf.y -= 120;
 				if(FlxG.save.data.distractions){
 				// trailArea.scrollFactor.set();
-				var evilTrail = new FlxTrail(dad, null, 1, 24, 0.3, 0.069);
+				var evilTrail = new FlxTrail(dad, null, 5, 7, 0.3, 0.001);
 				// evilTrail.changeValuesEnabled(false, false, false, false);
 				// evilTrail.changeGraphic()
 				add(evilTrail);
@@ -1026,7 +1144,7 @@ class PlayState extends MusicBeatState
 		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this,
 			'health', 0, 2);
 		healthBar.scrollFactor.set();
-		healthBar.createFilledBar(0xFFFF0000, 0xFF66FF33);
+		healthBar.createFilledBar(0xFF646566, 0xFF0278ED);
 		// healthBar
 		add(healthBar);
 
@@ -1513,53 +1631,55 @@ class PlayState extends MusicBeatState
 		{
 			var coolSection:Int = Std.int(section.lengthInSteps / 4);
 
-			for (songNotes in section.sectionNotes)
-			{
-				var daStrumTime:Float = songNotes[0] + FlxG.save.data.offset + songOffset;
-				if (daStrumTime < 0)
-					daStrumTime = 0;
-				var daNoteData:Int = Std.int(songNotes[1] % 4);
-
-				var gottaHitNote:Bool = section.mustHitSection;
-
-				if (songNotes[1] > 3)
+for (songNotes in section.sectionNotes)
 				{
-					gottaHitNote = !section.mustHitSection;
-				}
-
-				var oldNote:Note;
-				if (unspawnNotes.length > 0)
-					oldNote = unspawnNotes[Std.int(unspawnNotes.length - 1)];
-				else
-					oldNote = null;
-
-				var swagNote:Note = new Note(daStrumTime, daNoteData, oldNote);
-				swagNote.sustainLength = songNotes[2];
-				swagNote.scrollFactor.set(0, 0);
-
+					var daStrumTime:Float = songNotes[0] + FlxG.save.data.offset + songOffset;
+					if (daStrumTime < 0)
+						daStrumTime = 0;
+					var daNoteData:Int = Std.int(songNotes[1] % 4);
+ 
+					var gottaHitNote:Bool = section.mustHitSection;
+ 
+					if (songNotes[1] > 3)
+					{
+						gottaHitNote = !section.mustHitSection;
+					}
+ 
+					var oldNote:Note;
+					if (unspawnNotes.length > 0)
+						oldNote = unspawnNotes[Std.int(unspawnNotes.length - 1)];
+					else
+						oldNote = null;
+ 
+					var daType = songNotes[3];
+					var swagNote:Note = new Note(daStrumTime, daNoteData, oldNote, false, daType);
+					swagNote.sustainLength = songNotes[2];
+ 
+					swagNote.scrollFactor.set(0, 0);	
+ 
 				var susLength:Float = swagNote.sustainLength;
-
+ 
 				susLength = susLength / Conductor.stepCrochet;
 				unspawnNotes.push(swagNote);
-
+ 
 				for (susNote in 0...Math.floor(susLength))
 				{
 					oldNote = unspawnNotes[Std.int(unspawnNotes.length - 1)];
-
+ 
 					var sustainNote:Note = new Note(daStrumTime + (Conductor.stepCrochet * susNote) + Conductor.stepCrochet, daNoteData, oldNote, true);
 					sustainNote.scrollFactor.set();
 					unspawnNotes.push(sustainNote);
-
+ 
 					sustainNote.mustPress = gottaHitNote;
-
+ 
 					if (sustainNote.mustPress)
 					{
 						sustainNote.x += FlxG.width / 2; // general offset
 					}
 				}
-
+ 
 				swagNote.mustPress = gottaHitNote;
-
+ 
 				if (swagNote.mustPress)
 				{
 					swagNote.x += FlxG.width / 2; // general offset
@@ -1630,6 +1750,39 @@ class PlayState extends MusicBeatState
 				
 				case 'normal':
 					babyArrow.frames = Paths.getSparrowAtlas('NOTE_assets');
+					babyArrow.animation.addByPrefix('green', 'arrowUP');
+					babyArrow.animation.addByPrefix('blue', 'arrowDOWN');
+					babyArrow.animation.addByPrefix('purple', 'arrowLEFT');
+					babyArrow.animation.addByPrefix('red', 'arrowRIGHT');
+	
+					babyArrow.antialiasing = true;
+					babyArrow.setGraphicSize(Std.int(babyArrow.width * 0.7));
+	
+					switch (Math.abs(i))
+					{
+						case 0:
+							babyArrow.x += Note.swagWidth * 0;
+							babyArrow.animation.addByPrefix('static', 'arrowLEFT');
+							babyArrow.animation.addByPrefix('pressed', 'left press', 24, false);
+							babyArrow.animation.addByPrefix('confirm', 'left confirm', 24, false);
+						case 1:
+							babyArrow.x += Note.swagWidth * 1;
+							babyArrow.animation.addByPrefix('static', 'arrowDOWN');
+							babyArrow.animation.addByPrefix('pressed', 'down press', 24, false);
+							babyArrow.animation.addByPrefix('confirm', 'down confirm', 24, false);
+						case 2:
+							babyArrow.x += Note.swagWidth * 2;
+							babyArrow.animation.addByPrefix('static', 'arrowUP');
+							babyArrow.animation.addByPrefix('pressed', 'up press', 24, false);
+							babyArrow.animation.addByPrefix('confirm', 'up confirm', 24, false);
+						case 3:
+							babyArrow.x += Note.swagWidth * 3;
+							babyArrow.animation.addByPrefix('static', 'arrowRIGHT');
+							babyArrow.animation.addByPrefix('pressed', 'right press', 24, false);
+							babyArrow.animation.addByPrefix('confirm', 'right confirm', 24, false);
+						}
+                case 'boner':
+					babyArrow.frames = Paths.getSparrowAtlas('BONENotes');
 					babyArrow.animation.addByPrefix('green', 'arrowUP');
 					babyArrow.animation.addByPrefix('blue', 'arrowDOWN');
 					babyArrow.animation.addByPrefix('purple', 'arrowLEFT');
@@ -2415,6 +2568,14 @@ class PlayState extends MusicBeatState
 					{
 						if (SONG.song != 'Tutorial')
 							camZooming = true;
+                        if (SONG.song != 'The-End')
+							camZooming = true;
+                        if (SONG.song != 'Grudge')
+							camZooming = true;
+                        if (SONG.song != 'Finale')
+							camZooming = true;
+                        if (SONG.song != 'Dababy')
+							camZooming = true;
 
 						var altAnim:String = "";
 	
@@ -2721,38 +2882,66 @@ class PlayState extends MusicBeatState
 
 			switch(daRating)
 			{
-				case 'shit':
-					score = -300;
-					combo = 0;
-					misses++;
-					health -= 0.2;
-					ss = false;
-					shits++;
-					if (FlxG.save.data.accuracyMod == 0)
-						totalNotesHit += 0.25;
-				case 'bad':
-					daRating = 'bad';
-					score = 0;
-					health -= 0.06;
-					ss = false;
-					bads++;
-					if (FlxG.save.data.accuracyMod == 0)
-						totalNotesHit += 0.50;
-				case 'good':
-					daRating = 'good';
-					score = 200;
-					ss = false;
-					goods++;
-					if (health < 2)
-						health += 0.04;
-					if (FlxG.save.data.accuracyMod == 0)
-						totalNotesHit += 0.75;
-				case 'sick':
-					if (health < 2)
-						health += 0.1;
-					if (FlxG.save.data.accuracyMod == 0)
-						totalNotesHit += 1;
-					sicks++;
+					case 'shit':
+						if (daNote.noteType == 2)
+							{
+								health -= 10;
+							}
+						if (daNote.noteType == 1 || daNote.noteType == 0)
+							{
+								score = -300;
+								combo = 0;
+								misses++;
+								health -= 0.2;
+								ss = false;
+								shits++;
+								if (FlxG.save.data.accuracyMod == 0)
+									totalNotesHit += 0.25;
+							}
+					case 'bad':
+						if (daNote.noteType == 2)
+							{
+								health -= 10;
+							}
+						if (daNote.noteType == 1 || daNote.noteType == 0)
+							{
+								daRating = 'bad';
+								score = 0;
+								health -= 0.06;
+								ss = false;
+								bads++;
+								if (FlxG.save.data.accuracyMod == 0)
+									totalNotesHit += 0.50;
+							}
+					case 'good':
+						if (daNote.noteType == 2)
+							{
+								health -= 10;
+							}
+						if (daNote.noteType == 1 || daNote.noteType == 0)
+							{
+								daRating = 'good';
+								score = 200;
+								ss = false;
+								goods++;
+								if (health < 2)
+									health += 0.04;
+								if (FlxG.save.data.accuracyMod == 0)
+									totalNotesHit += 0.75;
+							}
+					case 'sick':
+						if (daNote.noteType == 2)
+							{
+								health -= 10;
+							}
+						if (daNote.noteType == 1 || daNote.noteType == 0)
+							{
+								if (health < 2)
+									health += 0.1;
+								if (FlxG.save.data.accuracyMod == 0)
+									totalNotesHit += 1;
+								sicks++;	
+							}					
 			}
 
 			// trace('Wife accuracy loss: ' + wife + ' | Rating: ' + daRating + ' | Score: ' + score + ' | Weight: ' + (1 - wife));
@@ -3519,7 +3708,7 @@ class PlayState extends MusicBeatState
 		if (curStep == 447 && curSong == 'The-End')
 		{
 			remove(dad);
-			dad = new Character(100, 100, 'pico');
+			dad = new Character(100, 100, 'dababy');
 			add(dad);
 		}
 

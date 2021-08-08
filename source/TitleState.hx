@@ -165,7 +165,7 @@ class TitleState extends MusicBeatState
 
 		if(Main.watermarks) {
 			logoBl = new FlxSprite(-150, -100);
-			logoBl.frames = Paths.getSparrowAtlas('KadeEngineLogoBumpin');
+			logoBl.frames = Paths.getSparrowAtlas('ReapEngineLogoFuckin');
 			logoBl.antialiasing = true;
 			logoBl.animation.addByPrefix('bump', 'logo bumpin', 24);
 			logoBl.animation.play('bump');
@@ -421,16 +421,16 @@ class TitleState extends MusicBeatState
 				if (Main.watermarks)
 					createCoolText(['Kade Engine', 'by']);
 				else
-					createCoolText(['In Partnership', 'with']);
+					createCoolText(['In Partnership', 'with da']);
 			case 7:
 				if (Main.watermarks)
 					addMoreText('KadeDeveloper');
 				else
 				{
-					addMoreText('Newgrounds');
+					addMoreText('Squad');
 					ngSpr.visible = true;
 				}
-			// credTextShit.text += '\nNewgrounds';
+			// credTextShit.text += '\nSquad';
 			case 8:
 				deleteCoolText();
 				ngSpr.visible = false;

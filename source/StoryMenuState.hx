@@ -31,21 +31,23 @@ class StoryMenuState extends MusicBeatState
 		['Satin Panties', "High", "Milf"],
 		['Cocoa', 'Eggnog', 'Winter Horrorland'],
 		['Senpai', 'Roses', 'Thorns'],
-		['The-End', 'Finale', 'Dababy']
+		['The-End', 'Grudge', 'Finale', 'Dababy'],
+        ['Mc-Mental']
 	];
 	var curDifficulty:Int = 1;
 
 	public static var weekUnlocked:Array<Bool> = [true, true, true, true, true, true, true, true];
 
 	var weekCharacters:Array<Dynamic> = [
-		['', 'bf', 'gf'],
-		['dad', 'bf', 'gf'],
-		['spooky', 'bf', 'gf'],
-		['pico', 'bf', 'gf'],
-		['mom', 'bf', 'gf'],
-		['parents-christmas', 'bf', 'gf'],
-		['senpai', 'bf', 'gf'],
-		['', 'bf', 'gf']
+		['', 'gf', 'bf'],
+		['dad', 'gf', 'bf'],
+		['spooky', 'gf', 'bf'],
+		['pico', 'gf', 'bf'],
+		['mom', 'gf', 'bf'],
+		['parents-christmas', 'gf', 'bf'],
+		['senpai', 'gf', 'bf'],
+		['', 'gf', 'bf'],
+        ['', 'gf', 'bf']
 	];
 
 	var weekNames:Array<String> = [
@@ -56,7 +58,8 @@ class StoryMenuState extends MusicBeatState
 		"MOMMY MUST MURDER",
 		"RED SNOW",
 		"Hating Simulator ft. Moawling",
-		"Ayo your death is near : )"
+		"Ayo your death is near : )",
+        "bididididididididididdidididi"
 	];
 
 	var txtWeekTitle:FlxText;
