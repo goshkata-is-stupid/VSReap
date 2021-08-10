@@ -164,7 +164,7 @@ class TitleState extends MusicBeatState
 		add(bg);
 
 		if(Main.watermarks) {
-			logoBl = new FlxSprite(-150, -100);
+			logoBl = new FlxSprite(-300, -100);
 			logoBl.frames = Paths.getSparrowAtlas('ReapEngineLogoFuckin');
 			logoBl.antialiasing = true;
 			logoBl.animation.addByPrefix('bump', 'logo bumpin', 24);
@@ -183,7 +183,7 @@ class TitleState extends MusicBeatState
 			// logoBl.color = FlxColor.BLACK;
 		}
 
-		gfDance = new FlxSprite(FlxG.width * 0.4, FlxG.height * 0.07);
+		gfDance = new FlxSprite(FlxG.width * 0, FlxG.height * 0);
 		gfDance.frames = Paths.getSparrowAtlas('gfDanceTitle');
 		gfDance.animation.addByIndices('danceLeft', 'gfDance', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
 		gfDance.animation.addByIndices('danceRight', 'gfDance', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
