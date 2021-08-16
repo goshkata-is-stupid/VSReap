@@ -518,8 +518,8 @@ class Character extends FlxSprite
 				playAnim('idle');
 
 			 case 'dababy':
-				// HA I NEED ME SOME SHIT WITH SOME BOP IN IT AKA DABABY LOADING CODE
-				tex = Paths.getSparrowAtlas('characters/', 'shared');
+				//  DABABY LOADING CODE
+				tex = Paths.getSparrowAtlas('characters/dababyassets', 'shared');
 				frames = tex;
 				animation.addByPrefix('idle', 'dababyidle', 24);
 				animation.addByPrefix('singUP', 'dababyup', 24);
