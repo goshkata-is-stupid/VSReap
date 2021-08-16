@@ -441,10 +441,10 @@ class TitleState extends MusicBeatState
 			case 9:
 				createCoolText([curWacky[0]]);
 			// credTextShit.visible = true;
-			case 11:
+			case 10:
 				addMoreText(curWacky[1]);
 			// credTextShit.text += '\nlmao';
-			case 12:
+			case 11:
 				deleteCoolText();
 			// credTextShit.visible = false;
 			// credTextShit.text = "Grim";
